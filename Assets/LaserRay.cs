@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LaserRay : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class LaserRay : MonoBehaviour {
     [SerializeField] private int maxBounces = 10;
 
     private RaycastHit hit;
+    private LaserReceiver laserReceiver;
 
     // Start is called before the first frame update
     void Start() {
@@ -42,6 +44,11 @@ public class LaserRay : MonoBehaviour {
                 {
                     // direction of ray is the angle between the vector and the hit object
                     ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
+                }
+                else if (hit.collider.CompareTag("LaserReceiver")) {
+                    laserReceiver = hit.collider.gameObject.GetComponent<LaserReceiver>();
+                    laserReceiver.Invoke("Activate", 0);
+                    break;
                 }
                 else {
                     break;
