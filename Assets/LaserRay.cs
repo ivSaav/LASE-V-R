@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LaserRay : MonoBehaviour {
 
@@ -9,38 +11,56 @@ public class LaserRay : MonoBehaviour {
     [SerializeField] private Transform laserStartPoint;
 
     [SerializeField] private int maxBounces = 10;
+
+    private RaycastHit hit;
+    private LaserReceiver laserReceiver;
+
     // Start is called before the first frame update
     void Start() {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.SetPosition(0, laserStartPoint.position);
     }
 
     // Update is called once per frame
-    void Update() {
-        RaycastLaser(transform.position, -transform.right);
-    }
+    void Update()
+    {
 
-    void RaycastLaser(Vector3 position, Vector3 direction) {
+        var ray = new Ray(laserStartPoint.position, -laserStartPoint.right);
+
+        lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, laserStartPoint.position);
 
-        for (var bounceIndex = 1; bounceIndex <= maxBounces; bounceIndex++) {
-            if (Physics.Raycast(position, direction, out var laserHit)) {
-                position = laserHit.point;
-                direction = Vector3.Reflect(direction, laserHit.normal);
+        for (var i = 0; i < maxBounces; i++)
+        {
+            // check collision
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000f))
+            {
+                // add new position to line renderer
+                lineRenderer.positionCount += 1;
+                    
+                // render position at line hit point
+                lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 
-                lineRenderer.SetPosition(bounceIndex, laserHit.point);
-
-                if (!laserHit.transform.gameObject.CompareTag("Reflectable")) {
-                    for (var remainingIndex = bounceIndex + 1; remainingIndex <= maxBounces; remainingIndex++) {
-                        lineRenderer.SetPosition(remainingIndex, laserHit.point);
-                    }
+                if (hit.collider.CompareTag("Reflectable"))
+                {
+                    // direction of ray is the angle between the vector and the hit object
+                    ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
+                }
+                else if (hit.collider.CompareTag("LaserReceiver")) {
+                    laserReceiver = hit.collider.gameObject.GetComponent<LaserReceiver>();
+                    laserReceiver.Invoke("Activate", 0);
+                    break;
+                }
+                else {
                     break;
                 }
             }
-            else {
-                for (var remainingIndex = bounceIndex + 1; remainingIndex <= maxBounces; remainingIndex++) {
-                    lineRenderer.SetPosition(remainingIndex, position + direction * 1000);
-                }
+            else
+            {              
+                // add new position to line renderer
+                lineRenderer.positionCount += 1;
+
+                // line renderer position has the same origin and direction as the ray
+                lineRenderer.SetPosition(lineRenderer.positionCount - 1, ray.origin + ray.direction * 1000f);
                 break;
             }
         }
