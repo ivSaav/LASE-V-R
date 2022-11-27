@@ -25,4 +25,9 @@ public class LaserReceiver : MonoBehaviour {
     void Activate() {
         activated = true;
     }
+
+    public bool IsActive()
+    {
+        return activated;
+    }
 }
