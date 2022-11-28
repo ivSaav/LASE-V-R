@@ -22,7 +22,7 @@ public class LaserReceiver : MonoBehaviour {
         activated = false;
     }
 
-    void Activate() {
+    public void Activate() {
         activated = true;
     }
 

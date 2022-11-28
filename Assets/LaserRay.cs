@@ -47,7 +47,7 @@ public class LaserRay : MonoBehaviour {
                 }
                 else if (hit.collider.CompareTag("LaserReceiver")) {
                     laserReceiver = hit.collider.gameObject.GetComponent<LaserReceiver>();
-                    laserReceiver.Invoke("Activate", 0);
+                    laserReceiver.Activate();
                     break;
                 }
                 else {
