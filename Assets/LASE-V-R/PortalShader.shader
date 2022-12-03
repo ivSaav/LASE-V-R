@@ -1,18 +1,14 @@
-Shader "Unlit/PortalShader"
+Shader "Custom/PortalShader"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _InactiveColor ("Inactive Color", Color) = (1, 1, 1, 1)
     }
     SubShader
     {
-        Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
-        Lighting Off
-        Cull Back
-		ZWrite On
-		ZTest Less
-		
-		Fog { Mode Off }
+        Tags { "RenderType"="Opaque" }
+        LOD 100
+        Cull Off
 
         Pass
         {
@@ -27,37 +23,33 @@ Shader "Unlit/PortalShader"
             struct appdata
             {
                 float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
             };
 
             struct v2f
             {
-                // float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
-                float4 screen_pos : TEXCOORD1;
+                float4 screen_pos: TEXCOORD0;
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
+            float4 _InactiveColor;
 
             v2f vert (const appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.screen_pos = ComputeScreenPos(o.vertex);
-                UNITY_TRANSFER_FOG(o, o.vertex);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                i.screen_pos /= i.screen_pos.w;
-                fixed4 col = tex2D(_MainTex, float2(i.screen_pos.x, i.screen_pos.y));
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
+                const float2 uv = i.screen_pos.xy / i.screen_pos.w;
+                const fixed4 portal_col = tex2D(_MainTex, uv);
+                return portal_col;
             }
             ENDCG
         }
     }
+    Fallback "Standard"
 }
