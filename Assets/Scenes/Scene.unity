@@ -310,7 +310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519610777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.21, y: 5.08, z: -12.9}
+  m_LocalPosition: {x: 1.21, y: 5.08, z: -14.76}
   m_LocalScale: {x: 7.5419, y: 10, z: 0.33464}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -413,6 +413,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 229c838e04e9a9f45831a380d8646a3e,
         type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 229c838e04e9a9f45831a380d8646a3e,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -424,7 +429,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 229c838e04e9a9f45831a380d8646a3e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.38
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 229c838e04e9a9f45831a380d8646a3e,
         type: 3}
@@ -524,8 +529,8 @@ MonoBehaviour:
   pairPortal: {fileID: 1414216277}
   portalOutlineRenderer: {fileID: 1030253160124688074}
   portalOutlineColour: {r: 0, g: 1, b: 0, a: 1}
---- !u!65 &695674675
-BoxCollider:
+--- !u!64 &695674673
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -534,9 +539,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.4, y: 1.4, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2124705421725058983, guid: 229c838e04e9a9f45831a380d8646a3e, type: 3}
 --- !u!1 &699113915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,7 +1384,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 229c838e04e9a9f45831a380d8646a3e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.88
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 229c838e04e9a9f45831a380d8646a3e,
         type: 3}
@@ -1478,8 +1484,8 @@ MonoBehaviour:
   pairPortal: {fileID: 695674672}
   portalOutlineRenderer: {fileID: 803479417}
   portalOutlineColour: {r: 1, g: 0, b: 0, a: 0}
---- !u!65 &1414216280
-BoxCollider:
+--- !u!64 &1414216283
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1487,10 +1493,11 @@ BoxCollider:
   m_GameObject: {fileID: 1414216276}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1.4, y: 1.4, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2124705421725058983, guid: 229c838e04e9a9f45831a380d8646a3e, type: 3}
 --- !u!1 &1467953398
 GameObject:
   m_ObjectHideFlags: 0
