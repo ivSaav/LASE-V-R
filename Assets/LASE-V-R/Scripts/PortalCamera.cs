@@ -14,25 +14,26 @@ public class PortalCamera : MonoBehaviour {
 
     private Camera mainCamera;
     
-    private RenderTexture[] portalTextures = new RenderTexture[2];
+    private readonly RenderTexture[] portalTextures = new RenderTexture[2];
 
-    private void Awake() {
+    private void Awake()
+    {
         mainCamera = GetComponent<Camera>();
 
         portalTextures[0] = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
         portalTextures[1] = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
     }
 
-    // Start is called before the first frame update
-    void Start() {
+    private void Start() {
         portals[0].renderer.material.mainTexture = portalTextures[0];
         portals[1].renderer.material.mainTexture = portalTextures[1];
     }
-    void Update() {
-        for (var i = 0; i < portals.Length; i++) {
+
+    private void OnPreRender() {
+        for (int i = 0; i < portals.Length; ++i) {
             if (portals[i].renderer.isVisible) {
                 portalCamera.targetTexture = portalTextures[i];
-                for (var iteration = maxRecursion - 1; iteration >= 0; iteration--) {
+                for (int iteration = maxRecursion - 1; iteration >= 0; iteration--) {
                     RenderCamera(portals[i], portals[1 - i], iteration);
                 }
             }
@@ -40,7 +41,6 @@ public class PortalCamera : MonoBehaviour {
     }
 
     private void RenderCamera(Portal inPortal, Portal outPortal, int recursionDepth) {
-
         Transform inPortalTransform = inPortal.transform;
         Transform outPortalTransform = outPortal.transform;
         Transform mainCameraTransform = mainCamera.transform;
@@ -48,7 +48,7 @@ public class PortalCamera : MonoBehaviour {
         portalCameraTransform.position = mainCameraTransform.position;
         portalCameraTransform.rotation = mainCameraTransform.rotation;
 
-        for (var i = 0; i < recursionDepth; i++) {
+        for (int i = 0; i <= recursionDepth; ++i) {
             // Calculate Relative Position of Portal Camera
             Vector3 relativePos = inPortalTransform.InverseTransformPoint(portalCameraTransform.position);
             relativePos = Quaternion.Euler(0, 180, 0) * relativePos;
@@ -60,7 +60,7 @@ public class PortalCamera : MonoBehaviour {
             portalCameraTransform.rotation = outPortalTransform.rotation * relativeRotation;
         }
 
-        Plane outView = new Plane(-outPortalTransform.forward, outPortalTransform.position);
+        Plane outView = new Plane(outPortalTransform.forward, outPortalTransform.position);
 
         Vector4 clipPlaneWorld = new Vector4(outView.normal.x, outView.normal.y, outView.normal.z, outView.distance);
         Vector4 clipPlaneCamera = Matrix4x4.Transpose(Matrix4x4.Inverse(portalCamera.worldToCameraMatrix)) * clipPlaneWorld;
@@ -68,6 +68,5 @@ public class PortalCamera : MonoBehaviour {
         portalCamera.projectionMatrix = mainCamera.CalculateObliqueMatrix(clipPlaneCamera);
         
         portalCamera.Render();
-
     }
 }

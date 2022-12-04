@@ -10,13 +10,10 @@ public class Portal : MonoBehaviour {
     [SerializeField] private Renderer portalOutlineRenderer;
     [SerializeField] private Color portalOutlineColour;
 
-    
-    public MeshRenderer plane;
-
     private Camera _playerCam, _portalCam;
     private RenderTexture _viewTexture;
 
-    public Renderer renderer { get; private set; }
+    public new Renderer renderer { get; private set; }
 
     private void Awake() {
         renderer = GetComponent<Renderer>();
