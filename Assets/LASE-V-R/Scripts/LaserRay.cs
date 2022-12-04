@@ -5,24 +5,36 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class LaserRay : MonoBehaviour {
-
-    private LineRenderer lineRenderer;
-
-    [SerializeField] private Transform laserStartPoint;
+    [SerializeField] public Transform laserStartPoint;
 
     [SerializeField] private int maxBounces = 10;
 
+    public delegate void LaserHit(LaserRay ray, RaycastHit hit);
+
+    public LaserHit OnLaserHit;
+
+    private LineRenderer lineRenderer;
     private RaycastHit hit;
     private LaserReceiver laserReceiver;
 
-    // Start is called before the first frame update
-    void Start() {
+    private void Start() {
         lineRenderer = GetComponent<LineRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisableLaser()
     {
+        laserStartPoint = null;
+        lineRenderer.positionCount = 0;
+    }
+
+    public bool IsLaserDisabled()
+    {
+        return laserStartPoint == null;
+    }
+
+    private void Update()
+    {
+        if (laserStartPoint == null) return;
 
         var ray = new Ray(laserStartPoint.position, -laserStartPoint.right);
 
@@ -48,6 +60,11 @@ public class LaserRay : MonoBehaviour {
                 else if (hit.collider.CompareTag("LaserReceiver")) {
                     laserReceiver = hit.collider.gameObject.GetComponent<LaserReceiver>();
                     laserReceiver.Activate();
+                    break;
+                }
+                else if (hit.collider.CompareTag("Portal"))
+                {
+                    OnLaserHit(this, hit);
                     break;
                 }
                 else {

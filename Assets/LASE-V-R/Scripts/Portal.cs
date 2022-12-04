@@ -4,52 +4,78 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Portal : MonoBehaviour {
-
     [SerializeField] private Portal pairPortal;
 
     [SerializeField] private Renderer portalOutlineRenderer;
     [SerializeField] private Color portalOutlineColour;
 
+    public new Renderer renderer { get; private set; }
+
     private Camera _playerCam, _portalCam;
     private RenderTexture _viewTexture;
 
-    public new Renderer renderer { get; private set; }
+    private LaserRay _teleportedLaser;
+    private GameObject _laserStartPoint;
+    private Coroutine _disableLaserCoroutine;
+
+    private const float DisableDelay = 0.03f;
 
     private void Awake() {
-        renderer = GetComponent<Renderer>();
+        renderer = GetComponent<MeshRenderer>();
+        _teleportedLaser = GetComponentInChildren<LaserRay>();
+        _laserStartPoint = new GameObject();
     }
 
     private void Start() {
         portalOutlineRenderer.material.SetColor("_PortalOutlineColour", portalOutlineColour);
+
+        foreach (LaserRay ray in FindObjectsOfType<LaserRay>())
+        {
+            ray.OnLaserHit += TeleportLaser;
+        }
     }
 
-    // private void CreateViewTexture()
-    // {
-    //     if (_viewTexture != null && _viewTexture.width == Screen.width && _viewTexture.height == Screen.height) return;
-    //
-    //     if (_viewTexture != null)
-    //     {
-    //         _viewTexture.Release();
-    //     }
-    //
-    //     _viewTexture = new RenderTexture(Screen.width, Screen.height, 0);
-    //     _portalCam.targetTexture = _viewTexture;
-    //     pairPortal.plane.material.mainTexture = _viewTexture;
-    // }
-    //
-    // public void Render()
-    // {
-    //     plane.enabled = false;
-    //     CreateViewTexture();
-    //
-    //     // Ensure that the camera position and rotation relative to the portal are the same as for the main camera
-    //     // relative to the pair portal
-    //     Matrix4x4 m = transform.localToWorldMatrix * pairPortal.transform.worldToLocalMatrix *
-    //             _playerCam.transform.localToWorldMatrix;
-    //     _portalCam.transform.SetPositionAndRotation(m.GetColumn(3), m.rotation);
-    //
-    //     _portalCam.Render();
-    //
-    //     plane.enabled = true;
-    // }
+    private void TeleportLaser(LaserRay laser, RaycastHit raycastHit)
+    {
+        if (laser == _teleportedLaser) return;
+        pairPortal.StopDisableLaser();
+
+        Transform pairTransform = pairPortal.transform;
+
+        Vector3 offset = raycastHit.point - transform.position;
+
+        Transform laserTransform = _laserStartPoint.transform;
+        laserTransform.position = pairTransform.position + offset;
+        laserTransform.rotation = laser.transform.rotation;
+
+        pairPortal._teleportedLaser.laserStartPoint = laserTransform;
+    }
+
+    private void Update()
+    {
+        if (!_teleportedLaser.IsLaserDisabled())
+        {
+            if (_disableLaserCoroutine == null)
+            {
+                _disableLaserCoroutine = StartCoroutine(nameof(DisableLaser));
+            }
+        }
+        else
+        {
+            StopDisableLaser();
+        }
+    }
+
+    private IEnumerator DisableLaser()
+    {
+        yield return new WaitForSeconds(DisableDelay);
+        _teleportedLaser.DisableLaser();
+    }
+
+    private void StopDisableLaser()
+    {
+        if (_disableLaserCoroutine == null) return;
+        StopCoroutine(nameof(DisableLaser));
+        _disableLaserCoroutine = null;
+    }
 }
