@@ -41,12 +41,15 @@ public class Portal : MonoBehaviour {
         pairPortal.StopDisableLaser();
 
         Transform pairTransform = pairPortal.transform;
-
-        Vector3 offset = raycastHit.point - transform.position;
-
         Transform laserTransform = _laserStartPoint.transform;
-        laserTransform.position = pairTransform.position + offset;
-        laserTransform.rotation = laser.transform.rotation;
+
+        Vector3 relativePos = transform.InverseTransformPoint(raycastHit.point);
+        relativePos = Quaternion.Euler(0, 180, 0) * relativePos;
+        laserTransform.position = pairTransform.TransformPoint(relativePos);
+
+        Quaternion relativeRotation = Quaternion.Inverse(transform.rotation) * laser.transform.rotation;
+        relativeRotation = Quaternion.Euler(0, 180, 0) * relativeRotation;
+        laserTransform.rotation = pairTransform.rotation * relativeRotation;
 
         pairPortal._teleportedLaser.laserStartPoint = laserTransform;
     }

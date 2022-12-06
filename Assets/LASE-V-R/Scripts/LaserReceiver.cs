@@ -3,26 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LaserReceiver : MonoBehaviour {
-
     [SerializeField] private Texture textureEnabled, textureDisabled;
 
     private bool activated;
     private GameObject laserReceiverBase;
-    
-    // Start is called before the first frame update
-    void Start() {
+    private new Renderer renderer;
+
+    private void Start() {
         activated = false;
         laserReceiverBase = transform.Find("Base").gameObject;
+        renderer = laserReceiverBase.GetComponent<Renderer>();
+
+        foreach (LaserRay ray in FindObjectsOfType<LaserRay>())
+        {
+            ray.OnLaserHit += (r, hit) => Activate();
+        }
     }
 
-    // Update is called once per frame
-    void Update() {
-        laserReceiverBase.GetComponent<Renderer>().material.SetTexture("_MainTex", activated ? textureEnabled : textureDisabled);
+    private void Update() {
+        renderer.material.SetTexture("_MainTex", activated ? textureEnabled : textureDisabled);
 
         activated = false;
     }
 
-    public void Activate() {
+    private void Activate() {
         activated = true;
     }
 
