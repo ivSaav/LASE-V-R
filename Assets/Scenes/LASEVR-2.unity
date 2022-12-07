@@ -14547,9 +14547,34 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 494600c62b372c3488e0d19f77a71f64, type: 2}
+    - target: {fileID: 3579217573637398388, guid: 108b89ace2875fc4d8daece802a7ccf3,
+        type: 3}
+      propertyPath: m_Name
+      value: PortalField
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 108b89ace2875fc4d8daece802a7ccf3, type: 3}
+--- !u!1 &3579217573417847882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3579217572328996128, guid: 108b89ace2875fc4d8daece802a7ccf3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3579217573417847881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3579217573417847883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579217573417847882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0361c10423dfb194b9b5eb1f6b5e1b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScene: LASEVR-2
+  receiver: {fileID: 2105132419}
 --- !u!1001 &7617564311075928890
 PrefabInstance:
   m_ObjectHideFlags: 0
