@@ -16,13 +16,17 @@ public class LaserReceiver : MonoBehaviour {
 
         foreach (LaserRay ray in FindObjectsOfType<LaserRay>())
         {
-            ray.OnLaserHit += (r, hit) => Activate();
+            ray.OnLaserHit += OnLaserHit;
         }
+    }
+
+    private void OnLaserHit(LaserRay laser, RaycastHit raycastHit) {
+        if (raycastHit.collider.gameObject != gameObject) return;
+        Activate();
     }
 
     private void Update() {
         renderer.material.SetTexture("_MainTex", activated ? textureEnabled : textureDisabled);
-
         activated = false;
     }
 

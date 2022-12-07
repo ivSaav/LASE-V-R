@@ -37,7 +37,7 @@ public class Portal : MonoBehaviour {
 
     private void TeleportLaser(LaserRay laser, RaycastHit raycastHit)
     {
-        if (laser == _teleportedLaser) return;
+        if (raycastHit.collider.gameObject != gameObject || laser == _teleportedLaser) return;
         pairPortal.StopDisableLaser();
 
         Transform pairTransform = pairPortal.transform;
