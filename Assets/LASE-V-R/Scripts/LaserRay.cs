@@ -15,7 +15,6 @@ public class LaserRay : MonoBehaviour {
 
     private LineRenderer lineRenderer;
     private RaycastHit hit;
-    private LaserReceiver laserReceiver;
 
     private void Start() {
         lineRenderer = GetComponent<LineRenderer>();
@@ -57,13 +56,7 @@ public class LaserRay : MonoBehaviour {
                     // direction of ray is the angle between the vector and the hit object
                     ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
                 }
-                else if (hit.collider.CompareTag("LaserReceiver")) {
-                    laserReceiver = hit.collider.gameObject.GetComponent<LaserReceiver>();
-                    laserReceiver.Activate();
-                    break;
-                }
-                else if (hit.collider.CompareTag("Portal"))
-                {
+                else if (hit.collider.CompareTag("LaserReceiver") || hit.collider.CompareTag("Portal")) {
                     OnLaserHit(this, hit);
                     break;
                 }
