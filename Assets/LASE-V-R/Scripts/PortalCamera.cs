@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 public class PortalCamera : MonoBehaviour {
 
     [SerializeField] private Portal[] portals = new Portal[2];
