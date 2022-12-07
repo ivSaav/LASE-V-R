@@ -8,6 +8,9 @@ public class LaserReceiver : MonoBehaviour {
     private bool activated;
     private GameObject laserReceiverBase;
     private new Renderer renderer;
+    private Coroutine _disableCoroutine;
+
+    private const float DisableDelay = 0.03f;
 
     private void Start() {
         activated = false;
@@ -22,12 +25,24 @@ public class LaserReceiver : MonoBehaviour {
 
     private void OnLaserHit(LaserRay laser, RaycastHit raycastHit) {
         if (raycastHit.collider.gameObject != gameObject) return;
+        StopDisable();
         Activate();
     }
 
     private void Update() {
         renderer.material.SetTexture("_MainTex", activated ? textureEnabled : textureDisabled);
-        activated = false;
+        
+        if (IsActive())
+        {
+            if (_disableCoroutine == null)
+            {
+                _disableCoroutine = StartCoroutine(nameof(Disable));
+            }
+        }
+        else
+        {
+            StopDisable();
+        }
     }
 
     private void Activate() {
@@ -37,5 +52,18 @@ public class LaserReceiver : MonoBehaviour {
     public bool IsActive()
     {
         return activated;
+    }
+
+    private IEnumerator Disable()
+    {
+        yield return new WaitForSeconds(DisableDelay);
+        activated = false;
+    }
+
+    private void StopDisable()
+    {
+        if (_disableCoroutine == null) return;
+        StopCoroutine(nameof(Disable));
+        _disableCoroutine = null;
     }
 }
