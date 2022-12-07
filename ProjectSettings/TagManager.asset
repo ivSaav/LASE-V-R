@@ -6,6 +6,8 @@ TagManager:
   tags:
   - LaserReceiver
   - Reflectable
+  - Button
+  - Portal
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - UI
   - Laser
   - 
-  - 
+  - StereoRender_Ignore
   - 
   - 
   - 
