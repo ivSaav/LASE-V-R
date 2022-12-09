@@ -6,10 +6,11 @@ using UnityEngine.Events;
 
 public class LaserRay : MonoBehaviour {
     [SerializeField] public Transform laserStartPoint;
+    public Vector3 initialDirection { get; set; }
 
     [SerializeField] private int maxBounces = 10;
 
-    public delegate void LaserHit(LaserRay ray, RaycastHit hit);
+    public delegate void LaserHit(LaserRay laserRay, Ray ray, RaycastHit hit);
 
     public LaserHit OnLaserHit;
 
@@ -18,6 +19,9 @@ public class LaserRay : MonoBehaviour {
 
     private void Start() {
         lineRenderer = GetComponent<LineRenderer>();
+        if (laserStartPoint != null) {
+            initialDirection = -laserStartPoint.right;
+        }
     }
 
     public void DisableLaser()
@@ -31,11 +35,10 @@ public class LaserRay : MonoBehaviour {
         return laserStartPoint == null;
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (laserStartPoint == null) return;
 
-        var ray = new Ray(laserStartPoint.position, -laserStartPoint.right);
+        var ray = new Ray(laserStartPoint.position, initialDirection);
 
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, laserStartPoint.position);
@@ -57,7 +60,7 @@ public class LaserRay : MonoBehaviour {
                     ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
                 }
                 else if (hit.collider.CompareTag("LaserReceiver") || hit.collider.CompareTag("Portal")) {
-                    OnLaserHit(this, hit);
+                    OnLaserHit(this, ray, hit);
                     break;
                 }
                 else {

@@ -35,7 +35,7 @@ public class Portal : MonoBehaviour {
         }
     }
 
-    private void TeleportLaser(LaserRay laser, RaycastHit raycastHit)
+    private void TeleportLaser(LaserRay laser, Ray ray, RaycastHit raycastHit)
     {
         if (raycastHit.collider.gameObject != gameObject || laser == _teleportedLaser) return;
         pairPortal.StopDisableLaser();
@@ -47,11 +47,13 @@ public class Portal : MonoBehaviour {
         relativePos = Quaternion.Euler(0, 180, 0) * relativePos;
         laserTransform.position = pairTransform.TransformPoint(relativePos);
 
-        Quaternion relativeRotation = Quaternion.Inverse(transform.rotation) * laser.transform.rotation;
-        relativeRotation = Quaternion.Euler(0, 180, 0) * relativeRotation;
-        laserTransform.rotation = pairTransform.rotation * relativeRotation;
-
         pairPortal._teleportedLaser.laserStartPoint = laserTransform;
+        
+        // Transform direction
+        Vector3 reflectedDirection = Vector3.Reflect(ray.direction, raycastHit.normal);
+        reflectedDirection = Quaternion.Inverse(transform.rotation) * reflectedDirection;
+        reflectedDirection = pairTransform.rotation * reflectedDirection;
+        pairPortal._teleportedLaser.initialDirection = reflectedDirection;
     }
 
     private void Update()

@@ -23,7 +23,7 @@ public class LaserReceiver : MonoBehaviour {
         }
     }
 
-    private void OnLaserHit(LaserRay laser, RaycastHit raycastHit) {
+    private void OnLaserHit(LaserRay laser, Ray ray, RaycastHit raycastHit) {
         if (raycastHit.collider.gameObject != gameObject) return;
         StopDisable();
         Activate();
