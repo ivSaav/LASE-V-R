@@ -5350,6 +5350,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1043723671174957295, guid: 73a162f13a1e38643a242d46ff8cab21,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1068318993}
     - target: {fileID: 1043723671884416724, guid: 73a162f13a1e38643a242d46ff8cab21,
         type: 3}
       propertyPath: m_text
@@ -9562,6 +9567,12 @@ MonoBehaviour:
   - {fileID: 861015236}
   portalCamera: {fileID: 861015238}
   maxRecursion: 5
+--- !u!20 &1068318993 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2014920, guid: dc06161b6d97feb419f45f03b62e14b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1068318989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1077925788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c0b2264371dda4d46b1b0a11ea4d5f03,
@@ -18517,6 +18528,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1569003945}
     m_Modifications:
+    - target: {fileID: 903816221474751193, guid: bd050348fc5f83948ab4468c0872f330,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1068318993}
     - target: {fileID: 903816221474751197, guid: bd050348fc5f83948ab4468c0872f330,
         type: 3}
       propertyPath: m_Pivot.x
