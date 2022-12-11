@@ -170,7 +170,7 @@ public class LEDNodeButton : MonoBehaviour {
     private void UpdateColor()
     {
         Material mat = rend.material;
-        Color baseColor = mat.color;
+        Color baseColor = (lightState == LightState.IDLE) ? mat.color : lightColor;
 
         // Calculate the resulting color based on the intensity.
         Color finalColor = baseColor * Mathf.LinearToGammaSpace(intensity);
