@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 // A LED node emitting light based on start/stop signals from the previous node in the chain.
 public class LEDNodeButton : MonoBehaviour {
@@ -6,7 +6,8 @@ public class LEDNodeButton : MonoBehaviour {
     [SerializeField] private PressButton button;
     
     // Previous linked LED node.
-    public LEDNodeButton prevNode = null;
+    [SerializeField]
+    private LEDNodeButton prevNode = null;
     // Start/stop signals for the next linked LED node.
     public bool nextStart { get; private set; } = false;
 
@@ -17,6 +18,7 @@ public class LEDNodeButton : MonoBehaviour {
     // Slow light progress indicator.
     public bool slowProgress = false;
 
+    [SerializeField] private Color lightColor = new Color(1, 1, 1);
 
     // Attached components.
     private Light pointLight = null;
@@ -47,12 +49,17 @@ public class LEDNodeButton : MonoBehaviour {
     void Start()
     {
         // Init the attached components.
-        pointLight = this.GetComponent<Light>();
+        pointLight = GetComponent<Light>();
         rend = GetComponent<Renderer>();
 
         if (isFirstNode) {
             button.onEnableEvent.AddListener(EnableLight);
             button.onDisableEvent.AddListener(DisableLight);
+        }
+
+        if (pointLight) {
+            pointLight.enabled = false;
+            pointLight.color = lightColor;
         }
     }
 
