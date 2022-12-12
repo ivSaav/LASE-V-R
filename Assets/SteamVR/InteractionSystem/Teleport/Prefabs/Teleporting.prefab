@@ -319,7 +319,6 @@ GameObject:
   - component: {fileID: 433792}
   - component: {fileID: 3343506}
   - component: {fileID: 2327308}
-  - component: {fileID: 114000012054325206}
   m_Layer: 0
   m_Name: TeleportDestination_Invalid
   m_TagString: Untagged
@@ -392,19 +391,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &114000012054325206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: 0
 --- !u!1 &113720
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,7 +955,6 @@ GameObject:
   - component: {fileID: 450016}
   - component: {fileID: 3308562}
   - component: {fileID: 2307398}
-  - component: {fileID: 114000010492062482}
   m_Layer: 0
   m_Name: DestinationReticle
   m_TagString: Untagged
@@ -1042,19 +1027,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &114000010492062482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: 0
 --- !u!1 &153726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1070,6 @@ GameObject:
   - component: {fileID: 475244}
   - component: {fileID: 11445746}
   - component: {fileID: 11445956}
-  - component: {fileID: 114000010264285480}
   m_Layer: 0
   m_Name: Teleporting
   m_TagString: Untagged
@@ -1113,7 +1084,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153878}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1155,14 +1126,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   floorFixupMaximumTraceDistance: 1
-  areaVisibleMaterial: {fileID: 2100000, guid: d2bbbd01c5b7a6b4bb5a1316f21fc1ff, type: 2}
-  areaLockedMaterial: {fileID: 2100000, guid: 0fe9e4228ebb3bc469ead815cd305d91, type: 2}
-  areaHighlightedMaterial: {fileID: 2100000, guid: 9001ec1e087534147bd9f18cbf931597,
+  areaVisibleMaterial: {fileID: 2100000, guid: 417e639b66cd3a24e9c5312be99ce3bd, type: 2}
+  areaLockedMaterial: {fileID: 2100000, guid: f6802bd638faedf4dbe4a57c1f222991, type: 2}
+  areaHighlightedMaterial: {fileID: 2100000, guid: a8cac5516702311429fe7478ff4d7d05,
     type: 2}
-  pointVisibleMaterial: {fileID: 2100000, guid: bda4e134e1985594ea5aa36ca5a739e2,
+  pointVisibleMaterial: {fileID: 2100000, guid: 510c6e0b8b5c948458c2b4bc3de5a637,
     type: 2}
-  pointLockedMaterial: {fileID: 2100000, guid: c8665e1aa63020343bc825410291e43a, type: 2}
-  pointHighlightedMaterial: {fileID: 2100000, guid: 92c458d658d953f4588489c06de30b56,
+  pointLockedMaterial: {fileID: 2100000, guid: f855134cdd14ab54fa2838027b3eec2f, type: 2}
+  pointHighlightedMaterial: {fileID: 2100000, guid: f71819766ca687246a2150260bcfc1c5,
     type: 2}
   destinationReticleTransform: {fileID: 450016}
   invalidReticleTransform: {fileID: 460596}
@@ -1211,20 +1182,8 @@ MonoBehaviour:
   arcDuration: 3
   segmentBreak: 0.025
   arcSpeed: 0.2
-  material: {fileID: 2100000, guid: da2a09186fc8dfa4c9f1c2933159f94f, type: 2}
+  material: {fileID: 2100000, guid: 140bd0e59d9bee94f9f0284c9eef5b32, type: 2}
   traceLayerMask: 0
---- !u!114 &114000010264285480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 153878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eedfa54ef02254a428194e8de8e14d75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &165400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,7 +1519,6 @@ GameObject:
   - component: {fileID: 4000010987318946}
   - component: {fileID: 33000013948641102}
   - component: {fileID: 23000012122883432}
-  - component: {fileID: 114000010221557166}
   m_Layer: 0
   m_Name: PlayAreaEdge
   m_TagString: Untagged
@@ -1633,19 +1591,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &114000010221557166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000010252528310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: 0
 --- !u!1 &1000010545928982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,7 +1602,6 @@ GameObject:
   - component: {fileID: 4000014002718978}
   - component: {fileID: 33000010155385218}
   - component: {fileID: 23000010500400360}
-  - component: {fileID: 114000014163398588}
   m_Layer: 0
   m_Name: PlayAreaCorner
   m_TagString: Untagged
@@ -1730,16 +1674,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &114000014163398588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000010545928982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a4af4cc6b48a9449034f15c9691985, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: 0
