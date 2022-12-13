@@ -17,7 +17,13 @@ public class SceneController : MonoBehaviour {
         {
             if (receiver.IsActive())
             {
-                SceneManager.LoadScene(nextScene);
+                if (nextScene.Equals("FINISH")) {
+                    Application.Quit();
+                    
+                }
+                else {
+                    SceneManager.LoadScene(nextScene);
+                }
             }
         }
         

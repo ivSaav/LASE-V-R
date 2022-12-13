@@ -50,7 +50,7 @@ public class Portal : MonoBehaviour {
         pairPortal._teleportedLaser.laserStartPoint = laserTransform;
         
         // Transform direction
-        Vector3 reflectedDirection = Vector3.Reflect(ray.direction, raycastHit.normal);
+        Vector3 reflectedDirection = new Vector3(-ray.direction.x, ray.direction.y, -ray.direction.z);
         reflectedDirection = Quaternion.Inverse(transform.rotation) * reflectedDirection;
         reflectedDirection = pairTransform.rotation * reflectedDirection;
         pairPortal._teleportedLaser.initialDirection = reflectedDirection;
