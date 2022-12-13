@@ -11,18 +11,19 @@ public class SceneController : MonoBehaviour {
 
     [SerializeField] private LaserReceiver receiver;
 
-    void OnTriggerEnter(Collider collider) {
-        Debug.Log("TRIGGER");
-
-
-        Debug.Log(collider.tag +  " " + collider.name);
-
+    void OnTriggerEnter(Collider collider)
+    {
         if (collider.gameObject.CompareTag("Player"))
         {
-            Debug.Log(receiver.IsActive());
             if (receiver.IsActive())
             {
-                SceneManager.LoadScene(nextScene);
+                if (nextScene.Equals("FINISH")) {
+                    Application.Quit();
+                    
+                }
+                else {
+                    SceneManager.LoadScene(nextScene);
+                }
             }
         }
         

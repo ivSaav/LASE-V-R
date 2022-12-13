@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 7434111636842923163}
   - component: {fileID: 1473081950024487271}
   - component: {fileID: 5105466744927126869}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Teleport Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7778279678103464290
 Transform:
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d2bbbd01c5b7a6b4bb5a1316f21fc1ff, type: 2}
+  - {fileID: 2100000, guid: 417e639b66cd3a24e9c5312be99ce3bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,12 +124,12 @@ GameObject:
   - component: {fileID: 6619299226440410388}
   - component: {fileID: 639776095586245101}
   - component: {fileID: 6421028846831767955}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Teleport Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2776327524319272738
 Transform:

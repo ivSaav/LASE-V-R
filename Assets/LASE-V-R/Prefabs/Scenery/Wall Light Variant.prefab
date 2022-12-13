@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1145749845}
   - component: {fileID: 1145749846}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -106,9 +106,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall Light Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 241687f1a2ac2ac4c8c35789ba1a8468, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 241687f1a2ac2ac4c8c35789ba1a8468, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 241687f1a2ac2ac4c8c35789ba1a8468, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 241687f1a2ac2ac4c8c35789ba1a8468, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 241687f1a2ac2ac4c8c35789ba1a8468, type: 3}
       propertyPath: m_LocalPosition.x
